@@ -1,4 +1,4 @@
-// só falta eu temrinhar passageiros e alinhar melhor pequenas coisas
+// só falta eu terminar passageiros e alinhar melhor pequenas coisas
 
 public class Main{
     
