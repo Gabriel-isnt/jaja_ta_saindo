@@ -3,6 +3,18 @@ public class Main{
         public static void main(String[] args){
         
         
+                Aviao aviao = new Aviao();
+                
+                Piloto piloto = new Piloto(1, "piloto");
+                CoPiloto copiloto = new CoPiloto(1, "copiloto");
+                Aeromoca aeromoca1 = new Aeromoca(1, "aeromoça 1");
+                Aeromoca aeromoca2 = new Aeromoca(2, "aeromoça 2");
+                
+                aviao.ocuparAcentos(piloto, 0);
+                aviao.ocuparAcentos(copiloto, 0);
+                aviao.ocuparAcentos(copiloto, 1);
+                
+        
         }
 }
 
@@ -17,6 +29,9 @@ abstract class Pessoa{
                 this.nome = nome;
         }
         
+        public String getNome(){
+                return nome;
+        }
 }
 
 
@@ -36,46 +51,42 @@ class CoPiloto extends Pessoa{
 }
 
 
-class Aeromocas extends Pessoa{
+class Aeromoca extends Pessoa{
         
-        public Aeromocas(int id, String nome){
+        public Aeromoca(int id, String nome){
                 super(id, nome);
         }
 }
 
 
-class Passageiro extends Pessoa{
-        
-}
 
 
 class Aviao{
         
-        private boolean[] lugares;
+        private Pessoa[] lugares;
         private boolean status;
         
         public Aviao(){
-                this.lugares = new boolean[250];
+                this.lugares = new Pessoa[250];
                 this.status = false;
         }
         
-        public void ocuparAcentos(int posicao){
+        public void ocuparAcentos(Pessoa pessoa, int posicao){
                 
-                if(posicao < 0 || posicao > 249){
-                        System.out.println("escolha uma posição entre 0 e 249");
+                if(posicao < 0 || posicao > 249){ 
+                        System.out.println("escolha um acento entre 0 e 249");
                         return;
                 }
                 
-                boolean ocupado = lugares[posicao];
-                
-                if(ocupado){
-                        System.out.println("Esse lugar está ocupado");
+                if(lugares[posicao] != null){
+                        System.out.printf("O lugar %d está ocupado por %s %n", posicao, lugares[posicao].getNome());
                         return;
                 }
                 
-                lugares[posicao] =  true;
-                System.out.println("Seu lugar foi garantido :)");
+                lugares[posicao] =  pessoa;
+                System.out.printf("Seu lugar na posiçao %d foi garantido %s %n", posicao, pessoa.getNome());
         }
+        
         
         
 }
