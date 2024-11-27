@@ -5,15 +5,17 @@ public class Main{
         
                 Aviao aviao = new Aviao();
                 
-                Piloto piloto = new Piloto(1, "piloto");
-                CoPiloto copiloto = new CoPiloto(1, "copiloto");
-                Aeromoca aeromoca1 = new Aeromoca(1, "aeromoça 1");
-                Aeromoca aeromoca2 = new Aeromoca(2, "aeromoça 2");
+                Piloto piloto = new Piloto(1, "xangalanga");
+                CoPiloto copiloto = new CoPiloto(1, "mamae");
+                Aeromoca aeromoca1 = new Aeromoca(1, "uau");
+                Aeromoca aeromoca2 = new Aeromoca(2, "WvW");
                 
                 aviao.ocuparAcentos(piloto, 0);
                 aviao.ocuparAcentos(copiloto, 0);
                 aviao.ocuparAcentos(copiloto, 1);
                 
+                aviao.mudaStatus();
+                aviao.mudaStatus();
         
         }
 }
@@ -60,15 +62,19 @@ class Aeromoca extends Pessoa{
 
 
 
+enum Status{
+        SUBINDO,
+        DESCENDO
+}
 
 class Aviao{
         
         private Pessoa[] lugares;
-        private boolean status;
+        private Status status;
         
         public Aviao(){
                 this.lugares = new Pessoa[250];
-                this.status = false;
+                this.status = Status.SUBINDO;
         }
         
         public void ocuparAcentos(Pessoa pessoa, int posicao){
@@ -87,7 +93,19 @@ class Aviao{
                 System.out.printf("Seu lugar na posiçao %d foi garantido %s %n", posicao, pessoa.getNome());
         }
         
-        
+        public void mudaStatus(){
+                
+                if(this.status == Status.SUBINDO){
+                        this.status = Status.DESCENDO;
+                        System.out.println("Status do voo mudado para descendo");
+                        
+                } else {
+                        this.status = Status.SUBINDO;
+                        System.out.println("Status do voo mudado para subindo");
+                }
+                
+                
+        }
         
 }
 
