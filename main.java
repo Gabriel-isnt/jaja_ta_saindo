@@ -1,6 +1,4 @@
-// só falta eu terminar passageiros e alinhar melhor pequenas coisas
-
-public class Main{
+public class main{
     
         public static void main(String[] args){
         
@@ -11,13 +9,22 @@ public class Main{
                 CoPiloto copiloto = new CoPiloto(1, "mamae");
                 Aeromoca aeromoca1 = new Aeromoca(1, "uau");
                 Aeromoca aeromoca2 = new Aeromoca(2, "WvW");
+                Passageiro pessoa1 = new Passageiro(1, "pspsspspsp");
+
                 
                 aviao.ocuparAcentos(piloto, 0);
-                aviao.ocuparAcentos(copiloto, 0);
                 aviao.ocuparAcentos(copiloto, 1);
+                aviao.ocuparAcentos(aeromoca1, 2);
+                aviao.ocuparAcentos(aeromoca2, 3);
                 
                 aviao.mudaStatus();
                 aviao.mudaStatus();
+
+                pessoa1.setAcento(3);
+                aviao.ocuparAcentos(pessoa1, pessoa1.getAcento());  
+
+                pessoa1.setAcento(4);
+                aviao.ocuparAcentos(pessoa1, pessoa1.getAcento()); 
         
         }
 }
@@ -27,15 +34,37 @@ abstract class Pessoa{
         
         private int id;
         private String nome;
+        protected Integer acento;
         
         public Pessoa(int id, String nome){
                 this.id = id;
                 this.nome = nome;
+                this.acento = null;
         }
         
+
         public String getNome(){
                 return nome;
         }
+
+        public void setAcento(int acento){
+                this.acento = acento;
+        }
+
+        public Integer getAcento(){
+                return acento;
+        }
+}
+
+
+class Passageiro extends Pessoa{
+
+
+        public Passageiro(int id, String nome){
+                super(id, nome);
+                this.acento = null;
+        }
+
 }
 
 
@@ -63,7 +92,6 @@ class Aeromoca extends Pessoa{
 }
 
 
-
 enum Status{
         SUBINDO,
         DESCENDO
@@ -78,6 +106,7 @@ class Aviao{
                 this.lugares = new Pessoa[250];
                 this.status = Status.SUBINDO;
         }
+
         
         public void ocuparAcentos(Pessoa pessoa, int posicao){
                 
@@ -92,6 +121,7 @@ class Aviao{
                 }
                 
                 lugares[posicao] =  pessoa;
+
                 System.out.printf("Seu lugar na posiçao %d foi garantido %s %n", posicao, pessoa.getNome());
         }
         
@@ -99,18 +129,13 @@ class Aviao{
                 
                 if(this.status == Status.SUBINDO){
                         this.status = Status.DESCENDO;
-                        System.out.println("Status do voo mudado para descendo");
                         
                 } else {
                         this.status = Status.SUBINDO;
-                        System.out.println("Status do voo mudado para subindo");
                 }
                 
+                System.out.printf("o avião está %s%n", this.status);
                 
         }
         
 }
-
-
-
-
